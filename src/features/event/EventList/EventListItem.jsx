@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 import EventListAttendee from './EventListAttendee';
 
 class EventListItem extends Component {
   render() {
-    const { eventChezEventList, onEventOpen, deleteEvent } = this.props;
+    const { event, deleteEvent } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -13,12 +14,12 @@ class EventListItem extends Component {
               <Item.Image
                 size="tiny"
                 circular
-                src={eventChezEventList.hostPhotoURL}
+                src={event.hostPhotoURL}
               />
               <Item.Content>
-                <Item.Header as="a">{eventChezEventList.title}</Item.Header>
+                <Item.Header as="a">{event.title}</Item.Header>
                 <Item.Description>
-                  Organisé par <a>{eventChezEventList.hostedBy}</a>
+                  Organisé par <a>{event.hostedBy}</a>
                 </Item.Description>
               </Item.Content>
             </Item>
@@ -26,31 +27,31 @@ class EventListItem extends Component {
         </Segment>
         <Segment>
           <span>
-            <Icon name="clock" /> {eventChezEventList.date} |
+            <Icon name="clock" /> {event.date} |
             <Icon name="marker" />
-            {eventChezEventList.venue}
+            {event.venue}
           </span>
         </Segment>
         <Segment secondary>
           <List horizontal>
-            {eventChezEventList.attendees &&
-              eventChezEventList.attendees.map(attendee => (
+            {event.attendees &&
+              event.attendees.map(attendee => (
                 <EventListAttendee key={attendee.id} participants={attendee} />
               ))};
           </List>
         </Segment>
         <Segment clearing>
-          <span>{eventChezEventList.description}</span>
+          <span>{event.description}</span>
           <Button
-            onClick={deleteEvent(eventChezEventList.id)}
+            onClick={deleteEvent(event.id)}
             as="a"
             color="red"
             floated="right"
             content="Delete"
           />
           <Button
-            onClick={onEventOpen(eventChezEventList)}
-            as="a"
+            as={Link}
+            to={`/event/${event.id}`}
             color="teal"
             floated="right"
             content="View"
