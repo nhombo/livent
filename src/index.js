@@ -1,28 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
-import App from './app/layout/App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import {Provider} from 'react-redux';
+import "semantic-ui-css/semantic.min.css";
+import App from "./app/layout/App";
+import "./index.css";
+import configureStore from "./app/store/configureStore";
 
-const rootElement = document.getElementById('root');
+const store = configureStore();
+
+const rootElement = document.getElementById("root");
 let render = () => {
   ReactDOM.render(
-  <BrowserRouter>
-  <App />
-  </BrowserRouter>  
-  ,
-   rootElement);
+      <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+      </Provider>
+      ,
+    rootElement
+  );
 };
 if (module.hot) {
-    module.hot.accept('./app/layout/App', () => {
-      setTimeout(render);
+  module.hot.accept("./app/layout/App", () => {
+    setTimeout(render);
   });
 }
 render();
-
-
-
-
-
-
