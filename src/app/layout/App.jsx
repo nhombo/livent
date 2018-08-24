@@ -26,7 +26,7 @@ class App extends Component {
               <NavBar />
               <Container className="main">
                 <Switch>
-                  <Route path="/essai" component={TestComponent} />
+                  <Route path="/test" component={TestComponent} />
                   <Route path="/events" component={EventDashboard} />>
                   <Route path="/event/:id" component={EventDetailedPage} />
                    <Route path="/manage/:id" component={EventForm} />

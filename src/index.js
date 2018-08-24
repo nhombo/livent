@@ -7,8 +7,10 @@ import App from "./app/layout/App";
 import "./index.css";
 import configureStore from "./app/store/configureStore";
 import ScrollToTop from "./app/common/util/ScrollToTop";
+import { loadEvents } from './features/event/eventActions'
 
 const store = configureStore();
+store.dispatch(loadEvents())
 
 const rootElement = document.getElementById("root");
 let render = () => {
